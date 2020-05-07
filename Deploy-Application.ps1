@@ -139,7 +139,7 @@ Try {
 		}
 
 		## <Perform Installation tasks here>
-		Show-InstallationProgress -StatusMessage "Updating Microsoft Office. Please wait..."
+		Show-InstallationProgress -StatusMessage "Installing Microsoft Office. Please wait..."
 		$exitCode = Execute-Process -Path "$dirFiles\setup.exe" -Parameters "/configure O365-1908-SingleUser(32-bit).xml" -WindowStyle "Hidden" -PassThru -WaitForMsiExec
 		If (($exitCode.ExitCode -ne "0") -and ($mainExitCode.ExitCode -ne "3010")) {
 			$mainExitCode = $exitCode.ExitCode
@@ -165,7 +165,7 @@ Try {
 		[string]$installPhase = 'Pre-Uninstallation'
 
 		## Show Welcome Message, close Internet Explorer with a 60 second countdown before automatically closing
-		Show-InstallationWelcome -CloseApps 'iexplore' -CloseAppsCountdown 60
+		Show-InstallationWelcome -CloseApps 'iexplore,teams' -CloseAppsCountdown 60
 
 		## Show Progress Message (with the default message)
 		Show-InstallationProgress
@@ -185,7 +185,7 @@ Try {
 		}
 
 		# <Perform Uninstallation tasks here>
-		Show-InstallationProgress -StatusMessage "Updating Microsoft Office. Please wait..."
+		Show-InstallationProgress -StatusMessage "Uninstalling Microsoft Office. Please wait..."
 		$exitCode = Execute-Process -Path "$dirFiles\setup.exe" -Parameters "/configure UninstallO365ProPlus.xml" -WindowStyle "Hidden" -PassThru -WaitForMsiExec
 		If (($exitCode.ExitCode -ne "0") -and ($mainExitCode.ExitCode -ne "3010")) {
 			$mainExitCode = $exitCode.ExitCode
